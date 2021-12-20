@@ -17,3 +17,7 @@
 
 ### Running the app
 - npm start
+
+## Code github pages
+
+[phase2](https://samahhamed227.github.io/storefront/)
