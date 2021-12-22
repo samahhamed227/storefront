@@ -1,8 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import { deleteProduct } from "../action/action";
+import { Button } from "@material-ui/core";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { If } from "react-if";
+
 
 function AddToCart(props) {  
     function handleList() {
@@ -32,6 +36,22 @@ function AddToCart(props) {
         <List component="nav" aria-label="secondary mailbox folders" style={{ zIndex: '3', position: 'absolute', right: '1%' }}>
           {handleList()}
         </List>
+        <If condition={() => props.cart.length !== 0}>
+          {
+            props.cart.map((el,idx)=>{
+              return(
+                <Button
+                    color="secondary"
+                    onClick={() => {
+                      props.deleteProduct(el, idx);
+                    }}
+                  >
+                  Delete
+                </Button>
+              )
+            })
+          }
+        </If>
       </div>
     )
 }
@@ -39,5 +59,7 @@ function AddToCart(props) {
 function mapStateToProps(state) {
     return state;
 }
-  
-export default connect(mapStateToProps)(AddToCart);
+
+const mapDispatchToProps = { deleteProduct };
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddToCart);
