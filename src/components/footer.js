@@ -12,7 +12,7 @@ export default function Footer() {
         <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
         </IconButton>
         <Typography variant="p" color="inherit" component="div" sx={{ mr: 110}}>
-        &copy; 2021 Samah Hamed
+        &copy; 2021 Razan Alamleh
         </Typography>
         <Typography variant="p" color="inherit" component="div" >
             Contacts Us 000-000-000

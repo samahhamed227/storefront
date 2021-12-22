@@ -13,44 +13,37 @@ const initialState ={
 
 export default (state = initialState, action) =>{
     const {type,payload}= action;
+
     switch(type){
-        case'ACTIVE_CATEGORY':
+        case'ACTIVE':
         let activated = state.products.filter(item =>{
             return item.category === payload;
         })
         return {
-            products: state.products, 
-            activeProduct:activated
+           ...state, activeProduct:activated
         };
-        case 'REMOVE':
-            let removing = state.products.map(item =>{
-                if(item.name == payload.name && item.inventoryCount >0){
+        case 'ADDPRODUCT':
+            let removing = state.products.map((item) =>{
+                if(item.name === payload.name && item.inventoryCount > 0){
                     item.inventoryCount = item.inventoryCount - 1;
                 }
-                if(item.inventoryCount === 0){
-                    return item.inventoryCount = 'Out Of Stock';
+                return item;
+            })
+            return{...state};
+
+        case 'DELETE':
+            state.products = state.products.map(item =>{
+                if(item.name == payload.name){
+                   item.inventoryCount = item.inventoryCount + 1;
+                   return item;
                 }
                 return item;
             });
         return {
-            products: removing,
-            activeProduct: state.activeProduct
+            ...state
         }
         default:
           return state;
     }
 }
 
-export function productActive(name){
-    return{
-        type:'ACTIVE_CATEGORY',
-        payload:name
-    }
-}
-
-export function inventory(name){
-    return{
-        type:'REMOVE',
-        payload: name
-    }
-}

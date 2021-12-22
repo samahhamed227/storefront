@@ -5,11 +5,18 @@ export default (state = initialState, action) =>{
     const {type,payload} = action;
 
     switch(type){
-        case 'ADD_TO_CART':
+        case 'ADD':
             if(payload.inventoryCount !== 0){
                 return [...state, payload];
             }else{
                 return state;
+            }
+        case 'DELETE':
+            const product = state.filter((item,idx)=>{
+                return idx !== payload.idx;
+            })
+            return{
+                product
             }
         default:
             return state;

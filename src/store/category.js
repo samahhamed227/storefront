@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
 
   const { payload, type } = action;
   switch (type) {
-    case 'ACTIVE_CATEGORY':
+    case 'ACTIVE':
       let activated = {};
 
       state.categories.map(item => {
@@ -31,6 +31,8 @@ export default (state = initialState, action) => {
         categories: state.categories,
         activeCategory: activated
       };
+    case 'RESET':
+      return initialState;
     default:
       return state;
   }
@@ -39,7 +41,13 @@ export default (state = initialState, action) => {
 
 export function active(name) {
   return {
-    type: 'ACTIVE_CATEGORY',
+    type: 'ACTIVE',
     payload: name
   }
+}
+
+export function reset() {
+return {
+  type: 'RESET',
+}
 }
